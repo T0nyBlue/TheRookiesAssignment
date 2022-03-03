@@ -22,12 +22,12 @@ namespace DataAccess.Model
         public float Total { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string Status { get; set; }
+        public string? Status { get; set; }
 
         //Foreign Key
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
 
-        public List<OrderDetail> OrderDetails { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
     }
 }

@@ -13,19 +13,19 @@ namespace DataAccess.Model
         public Guid UserAddrId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string UserAddr { get; set; }
+        public string? UserAddr { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string UserCity { get; set; }
+        public string? UserCity { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string UserProvince { get; set; }
+        public string? UserProvince { get; set; }
 
         //Foreign Key
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 }

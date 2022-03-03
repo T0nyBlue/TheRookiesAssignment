@@ -11,10 +11,10 @@ namespace DataAccess.Model
     {
         [Key]
         public Guid ImgId { get; set; }
-        public string ProductImgLink { get; set; }
+        public string? ProductImgLink { get; set; }
 
         //Foreign Key
         public Guid ProductId { get; set; }
-        public Product Product { get; set; }
+        public Product? Product { get; set; }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\Customer\\Customer.csproj": {}
+    "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\Customer\\Customer.csproj": {}
   },
   "projects": {
-    "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\Customer\\Customer.csproj": {
+    "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\Customer\\Customer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\Customer\\Customer.csproj",
+        "projectUniqueName": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\Customer\\Customer.csproj",
         "projectName": "Customer",
-        "projectPath": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\Customer\\Customer.csproj",
+        "projectPath": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\Customer\\Customer.csproj",
         "packagesPath": "C:\\Users\\CAM PHA\\.nuget\\packages\\",
-        "outputPath": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\Customer\\obj\\",
+        "outputPath": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\Customer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\CAM PHA\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\DataAccess.csproj": {
-                "projectPath": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\DataAccess.csproj"
+              "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\DataAccess.csproj": {
+                "projectPath": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\DataAccess.csproj"
               }
             }
           }
@@ -77,14 +77,14 @@
         }
       }
     },
-    "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\DataAccess.csproj": {
+    "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\DataAccess.csproj",
+        "projectUniqueName": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\DataAccess.csproj",
         "projectName": "DataAccess",
-        "projectPath": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\DataAccess.csproj",
+        "projectPath": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\DataAccess.csproj",
         "packagesPath": "C:\\Users\\CAM PHA\\.nuget\\packages\\",
-        "outputPath": "C:\\Tony-Intern-Nashtech\\RookiesEcomerce\\DataAccess\\obj\\",
+        "outputPath": "C:\\Tony-Intern-Nashtech\\TheRookiesProject\\RookiesEcomerce\\DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\CAM PHA\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -113,6 +113,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.2, )"

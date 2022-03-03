@@ -1,4 +1,6 @@
-﻿using DataAccess.Data;
+﻿using AutoMapper;
+using DataAccess.Data;
+using DataAccess.DTO;
 using DataAccess.Model;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -11,9 +13,11 @@ namespace Admin.Controllers
     public class CategoryController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        public CategoryController(ApplicationDbContext db)
+        private readonly IMapper _mapper;
+        public CategoryController(ApplicationDbContext db, IMapper mapper)
         {
             _db = db;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -30,7 +34,22 @@ namespace Admin.Controllers
             {
                 return BadRequest("Category not found!");
             }
+
             return Ok(category);
         }
+
+        [HttpPost]
+        public async Task<ActionResult<List<PostCategoryDto>>> CreateCategory(PostCategoryDto postCategoryDto)
+        {
+            //Mapping to Persist to Data
+            var category = _mapper.Map<Category>(postCategoryDto);
+
+            _db.Add(category);
+            await _db.SaveChangesAsync();
+
+            return Ok(category);
+        }
+
+
     }
 }

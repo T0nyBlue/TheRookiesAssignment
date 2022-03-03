@@ -14,11 +14,11 @@ namespace DataAccess.Model
         public Guid CategoryId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string CategoryName { get; set; }
+        public string? CategoryName { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;
         public Guid CreateBy { get; set; }
         
         //Foreign Key
-        public List<Product> Products { get; set; }
+        public List<Product>? Products { get; set; }
     }
 }

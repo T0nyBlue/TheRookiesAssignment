@@ -14,26 +14,26 @@ namespace DataAccess.Model
         public Guid UserId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string UserName { get; set; }
+        public string? UserName { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string FullName { get; set; }
+        public string? FullName { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public DateTime DateofBirth { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         //Foreign Key
-        public List<ProductRating> ProductRatings { get; set; }
-        public List<UserAddress> UserAddresses { get; set; }
-        public List<Order> Orders { get; set; }
+        public List<ProductRating>? ProductRatings { get; set; }
+        public List<UserAddress>? UserAddresses { get; set; }
+        public List<Order>? Orders { get; set; }
     }
 }

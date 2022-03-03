@@ -14,7 +14,7 @@ namespace DataAccess.Model
         public Guid ProductId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string ProductName { get; set; }
+        public string? ProductName { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public float Price { get; set; }
@@ -33,9 +33,9 @@ namespace DataAccess.Model
 
         //Foreign Key
         public Guid CategoryId { get; set; }
-        public Category Category { get; set; }
-        public List<ProductImg> ProductImgs { get; set; }
-        public List<ProductRating> ProductRatings { get; set; }
-        public List<OrderDetail> OrderDetails { get; set; }
+        public Category? Category { get; set; }
+        public List<ProductImg>? ProductImgs { get; set; }
+        public List<ProductRating>? ProductRatings { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
     }
 }

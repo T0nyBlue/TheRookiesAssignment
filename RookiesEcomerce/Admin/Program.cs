@@ -10,6 +10,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
    builder.Configuration.GetConnectionString("DefaultConnection")
 ));
 
+// Registering AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

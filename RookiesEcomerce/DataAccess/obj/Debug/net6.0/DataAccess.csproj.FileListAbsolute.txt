@@ -12,3 +12,17 @@ C:\Tony-Intern-Nashtech\RookiesEcomerce\DataAccess\obj\Debug\net6.0\refint\DataA
 C:\Tony-Intern-Nashtech\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.pdb
 C:\Tony-Intern-Nashtech\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache
 C:\Tony-Intern-Nashtech\RookiesEcomerce\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\bin\Debug\net6.0\DataAccess.deps.json
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\bin\Debug\net6.0\DataAccess.runtimeconfig.json
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\bin\Debug\net6.0\DataAccess.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\bin\Debug\net6.0\DataAccess.pdb
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.csproj.AssemblyReference.cache
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfoInputs.cache
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfo.cs
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\refint\DataAccess.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.pdb
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll

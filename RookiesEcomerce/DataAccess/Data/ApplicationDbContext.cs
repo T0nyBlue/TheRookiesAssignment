@@ -22,5 +22,12 @@ namespace DataAccess.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasOne(c => c.Category)
+                .WithMany(p => p.Products)
+                .HasForeignKey(c => c.CategoryId);
+        }
     }
 }
