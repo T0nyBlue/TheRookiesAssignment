@@ -1,10 +1,14 @@
 ﻿using AutoMapper;
 using DataAccess.Data;
 using DataAccess.DTO;
+using DataAccess.DTO;
+using DataAccess.DTO.CategoryDto;
 using DataAccess.Model;
+using EnsureThat;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Admin.Controllers
 {
@@ -20,36 +24,119 @@ namespace Admin.Controllers
             _mapper = mapper;
         }
 
+        //Get all categories
         [HttpGet]
-        public async Task<ActionResult<List<Category>>> GetAllCategories()
+        public async Task<ActionResult<List<CategoryReadDto>>> GetCategories(int page)
         {
-            return Ok(await _db.Categories.ToListAsync());
+            if (_db.Categories == null)
+            {
+                return NotFound();
+            }
+
+            var pageResults = 3f;
+            var pageCount = Math.Ceiling(_db.Categories.Count() / pageResults);
+
+            var categoryResponse = await _db.Categories
+                .Skip((page - 1) * (int)pageResults)
+                .Take((int)pageResults)
+                .ToListAsync();
+
+            var categoryDtoResponse = _mapper.Map<List<CategoryReadDto>>(categoryResponse);
+
+            var response = new CategoryResponseDto
+            {
+                Categories = categoryDtoResponse,
+                CurrentPage = page,
+                Pages = (int)pageCount
+            };
+
+            return Ok(response);
         }
 
+        //Get one categories
         [HttpGet("{id}")]
-        public async Task<ActionResult<List<Category>>> GetOneCategory(Guid id)
+        public async Task<ActionResult<CategoryReadDto>> GetOneCategory(Guid id)
         {
-            var category = await _db.Categories.FindAsync(id);
+            var category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryId ==id);
             if(category == null)
             {
                 return BadRequest("Category not found!");
             }
 
-            return Ok(category);
+            var categoryResponse = _mapper.Map<CategoryReadDto>(category);
+
+            return Ok(categoryResponse);
         }
 
-        [HttpPost]
-        public async Task<ActionResult<List<PostCategoryDto>>> CreateCategory(PostCategoryDto postCategoryDto)
+        //Search categories
+        [HttpGet("/api/Category/Search")]
+        public async Task<ActionResult<List<CategoryReadDto>>> SearchCategories(int page, string keyword)
         {
-            //Mapping to Persist to Data
+            if (_db.Categories == null)
+            {
+                return NotFound();
+            }
+
+            var pageResults = 3f;
+            var pageCount = Math.Ceiling(_db.Categories.Count() / pageResults);
+
+            var categoryResponse = await _db.Categories
+                .Where(x => x.CategoryName.Contains(keyword))
+                .Skip((page - 1) * (int)pageResults)
+                .Take((int)pageResults)
+                .ToListAsync();
+
+            var categoryDtoResponse = _mapper.Map<List<CategoryReadDto>>(categoryResponse);
+
+            var response = new CategoryResponseDto
+            {
+                Categories = categoryDtoResponse,
+                CurrentPage = page,
+                Pages = (int)pageCount
+            };
+
+            return Ok(response);
+        }
+
+        //Create categories
+        [HttpPost]
+        public async Task<ActionResult<List<CategoryCreateDto>>> CreateCategory(CategoryCreateDto postCategoryDto)
+        {
+            Ensure.Any.IsNotNull(postCategoryDto, nameof(CategoryCreateDto));
             var category = _mapper.Map<Category>(postCategoryDto);
 
-            _db.Add(category);
+            _db.Categories.Add(category);
             await _db.SaveChangesAsync();
 
             return Ok(category);
         }
 
+        //Update categories
+        [HttpPut]
+        public async Task<ActionResult<CategoryCreateDto>> UpdateCategory(CategoryCreateDto updateCategoryDto)
+        {
+            var category = _mapper.Map<Category>(updateCategoryDto);
+            _db.Categories.Update(category);
+            await _db.SaveChangesAsync();
 
+            return Ok("Category Updated!");
+        }
+
+
+        //Delete
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCategory(Guid id)
+        {
+            var category = await _db.Categories.FindAsync(id);
+            if(category == null)
+            {
+                return NotFound("No category founded!");
+            }
+
+            _db.Categories.Remove(category);
+            await _db.SaveChangesAsync();
+
+            return Ok("Category Deleted");
+        }
     }
 }
