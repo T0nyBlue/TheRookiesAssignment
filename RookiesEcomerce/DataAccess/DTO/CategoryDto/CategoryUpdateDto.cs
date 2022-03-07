@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DTO.CategoryDto
 {
-    public class CategoryCreateDto
+    public class CategoryUpdateDto
     {
+        [Key]
+        public Guid CategoryId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string? CategoryName { get; set; }
-        public Guid CreateBy { get; set; }
     }
 }

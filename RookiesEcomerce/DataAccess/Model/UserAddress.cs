@@ -13,7 +13,7 @@ namespace DataAccess.Model
         public Guid UserAddrId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string? PhoneNumber { get; set; }
+        public string? UserAddrPhoneNumber { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string? UserAddr { get; set; }

@@ -26,6 +26,9 @@ namespace DataAccess.Model
         public DateTime DateofBirth { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string? PhoneNumber { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string? Email { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]

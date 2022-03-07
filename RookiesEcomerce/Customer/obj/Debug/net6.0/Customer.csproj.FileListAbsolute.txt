@@ -124,3 +124,5 @@ C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\obj\Debug\net
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\obj\Debug\net6.0\Customer.pdb
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\obj\Debug\net6.0\Customer.genruntimeconfig.cache
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\obj\Debug\net6.0\ref\Customer.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net6.0\AutoMapper.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

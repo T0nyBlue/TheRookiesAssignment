@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Data;
 using DataAccess.DTO;
-using DataAccess.DTO;
 using DataAccess.DTO.CategoryDto;
 using DataAccess.Model;
 using EnsureThat;
@@ -78,7 +77,7 @@ namespace Admin.Controllers
             }
 
             var pageResults = 3f;
-            var pageCount = Math.Ceiling(_db.Categories.Count() / pageResults);
+            var pageCount = Math.Ceiling(_db.Categories.Where(x => x.CategoryName.Contains(keyword)).Count() / pageResults);
 
             var categoryResponse = await _db.Categories
                 .Where(x => x.CategoryName.Contains(keyword))
@@ -98,11 +97,11 @@ namespace Admin.Controllers
             return Ok(response);
         }
 
-        //Create categories
+        //Create category
         [HttpPost]
         public async Task<ActionResult<List<CategoryCreateDto>>> CreateCategory(CategoryCreateDto postCategoryDto)
         {
-            Ensure.Any.IsNotNull(postCategoryDto, nameof(CategoryCreateDto));
+            Ensure.Any.IsNotNull(postCategoryDto, nameof(postCategoryDto));
             var category = _mapper.Map<Category>(postCategoryDto);
 
             _db.Categories.Add(category);
@@ -113,9 +112,11 @@ namespace Admin.Controllers
 
         //Update categories
         [HttpPut]
-        public async Task<ActionResult<CategoryCreateDto>> UpdateCategory(CategoryCreateDto updateCategoryDto)
+        public async Task<ActionResult<CategoryUpdateDto>> UpdateCategory(CategoryUpdateDto updateCategoryDto)
         {
+            Ensure.Any.IsNotNull(updateCategoryDto, nameof(updateCategoryDto));
             var category = _mapper.Map<Category>(updateCategoryDto);
+
             _db.Categories.Update(category);
             await _db.SaveChangesAsync();
 
@@ -127,7 +128,7 @@ namespace Admin.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteCategory(Guid id)
         {
-            var category = await _db.Categories.FindAsync(id);
+            var category = await _db.Categories.FirstOrDefaultAsync(x => x.CategoryId == id);
             if(category == null)
             {
                 return NotFound("No category founded!");
