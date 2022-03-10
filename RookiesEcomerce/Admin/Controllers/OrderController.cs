@@ -58,7 +58,7 @@ namespace Admin.Controllers
             }
 
             var pageResults = 3f;
-            var pageCount = Math.Ceiling(_db.Orders.Count() / pageResults);
+            var pageCount = Math.Ceiling(_db.Orders.Where(x => x.OrderId.ToString().Contains(keyword)).Count() / pageResults);
 
             var orderResponse = await _db.Orders
                 .Where(x => x.OrderId.ToString().Contains(keyword))

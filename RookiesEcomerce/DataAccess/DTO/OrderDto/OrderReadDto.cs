@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DataAccess.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccess.DTO.OrderDto
@@ -16,5 +18,7 @@ namespace DataAccess.DTO.OrderDto
 
         //Foreign Key
         public Guid UserId { get; set; }
+        public List<OrderDetail>? OrderDetails { get; set; }
+
     }
 }
