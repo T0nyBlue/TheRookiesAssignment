@@ -43,6 +43,7 @@
                         <div class="shop__sidebar__search">
                             <form method="get" asp-page="./Shop">
                                 <input name="SearchString" placeholder="Search..." value="@Model.searchstring">
+                                @*<input asp-for="searchstring" placeholder="Search..." value="@Model.searchstring">*@
                                 <button type="submit"><span class="icon_search"></span></button>
                             </form>
                         </div>
