@@ -1,5 +1,6 @@
 using AutoMapper;
 using DataAccess.Data;
+using DataAccess.DTO.CategoryDto;
 using DataAccess.DTO.ProductDto;
 using DataAccess.DTO.ProductImgDto;
 using DataAccess.Model;
@@ -14,13 +15,19 @@ namespace Customer.Pages
         private readonly ApplicationDbContext _db;
         private readonly IMapper _mapper;
 
-        //public ProductResponseDto response { get; set; }
+        public ShopModel(ApplicationDbContext db, IMapper mapper)
+        {
+            _db = db;
+            _mapper = mapper;
+        }
+
+        public List<CategoryReadDto> categoryResponse { get; set; }
 
         public List<ProductReadDto> productDtoResponse { get; set; }
 
         public List<Product> productResponse { get; set; }
 
-        public const int pageResults = 1;
+        public const int pageResults = 9;
 
         [BindProperty(SupportsGet = true, Name = "p")]
         public int page { get; set; } = 1;
@@ -29,10 +36,11 @@ namespace Customer.Pages
 
         public string searchstring { get; set; } = "";
 
-        public ShopModel(ApplicationDbContext db, IMapper mapper)
+        public void OnGetCategory()
         {
-            _db = db;
-            _mapper = mapper;
+            var response = _db.Categories.ToList();
+
+            categoryResponse = _mapper.Map<List<CategoryReadDto>>(response);
         }
 
         public async Task OnGetAsync(string SearchString)

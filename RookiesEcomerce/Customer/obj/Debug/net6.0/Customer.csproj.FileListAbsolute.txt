@@ -63,3 +63,4 @@ C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\obj\Debug\net6.0\Customer.csproj.CopyComplete
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net6.0\Humanizer.dll
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer\bin\Debug\net6.0\Newtonsoft.Json.dll
