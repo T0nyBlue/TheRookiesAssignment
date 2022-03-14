@@ -21,38 +21,62 @@ namespace Customer.Pages
             _mapper = mapper;
         }
 
+        [BindProperty(SupportsGet = true, Name = "SearchCategory")]
+        public Guid? searchCategory { get; set; } = null;
+
         public List<CategoryReadDto> categoryResponse { get; set; }
 
         public List<ProductReadDto> productDtoResponse { get; set; }
 
         public List<Product> productResponse { get; set; }
 
-        public const int pageResults = 9;
+        public const int pageResults = 1;
 
         [BindProperty(SupportsGet = true, Name = "p")]
         public int page { get; set; } = 1;
 
         public int pagesCount { get; set; }
 
-        public string searchstring { get; set; } = "";
+        [BindProperty(SupportsGet = true, Name = "SearchString")]
+        public string searchString { get; set; } = "";
 
-        public void OnGetCategory()
+        public async Task OnGetCategoryAsync()
         {
-            var response = _db.Categories.ToList();
+            var response = await _db.Categories.ToListAsync();
 
             categoryResponse = _mapper.Map<List<CategoryReadDto>>(response);
         }
 
-        public async Task OnGetAsync(string SearchString)
+        public async Task OnGetAsync()
         {
             //pagesCount = (int)Math.Ceiling((double)_db.Products.Count() / pageResults);
-            searchstring = SearchString;
+            var response = await _db.Categories.ToListAsync();
 
-            if (!string.IsNullOrEmpty(SearchString))
+            categoryResponse = _mapper.Map<List<CategoryReadDto>>(response);
+
+            if (!string.IsNullOrEmpty(searchString) && searchCategory == null)
             {
-                pagesCount = (int)Math.Ceiling((double)_db.Products.Where(x => x.ProductName.Contains(SearchString)).Count() / pageResults);
+                pagesCount = (int)Math.Ceiling((double)_db.Products.Where(x => x.ProductName.Contains(searchString)).Count() / pageResults);
                 productResponse = await _db.Products
-                    .Where(x => x.ProductName.Contains(SearchString))
+                    .Where(x => x.ProductName.Contains(searchString))
+                    .Skip((page - 1) * (int)pageResults)
+                    .Take((int)pageResults)
+                    .ToListAsync();
+            } 
+            else if (string.IsNullOrEmpty(searchString) && searchCategory != null)
+            {
+                pagesCount = (int)Math.Ceiling((double)_db.Products.Where(x => x.CategoryId == searchCategory).Count() / pageResults);
+                productResponse = await _db.Products
+                    .Where(x => x.CategoryId == searchCategory)
+                    .Skip((page - 1) * (int)pageResults)
+                    .Take((int)pageResults)
+                    .ToListAsync();
+            }
+            else if (!string.IsNullOrEmpty(searchString) && searchCategory != null)
+            {
+                pagesCount = (int)Math.Ceiling((double)_db.Products.Where(x => x.CategoryId == searchCategory && x.ProductName.Contains(searchString)).Count() / pageResults);
+                productResponse = await _db.Products
+                    .Where(x => x.CategoryId == searchCategory && x.ProductName.Contains(searchString))
                     .Skip((page - 1) * (int)pageResults)
                     .Take((int)pageResults)
                     .ToListAsync();

@@ -10,7 +10,8 @@
     {
         curentpage = Model.page,
         countpage = Model.pagesCount,
-        generateUrl = (int?p) => Url.Page("/Shop", (Model.searchstring != "" ? new{SearchString = Model.searchstring, p = p} : new{p = p}))
+        //generateUrl = (int?p) => Url.Page("/Shop", (Model.searchstring != "" ? new{SearchString = Model.searchstring, p = p} : new{p = p}))
+        generateUrl = (int?p) => Url.Page("/Shop", new{SearchCategory = Model.searchCategory, SearchString = Model.searchString, p = p})
     };
 }
 
@@ -40,45 +41,38 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="shop__sidebar">
-                        <div class="shop__sidebar__search">
-                            <form method="get" asp-page="./Shop">
-                                <input name="SearchString" placeholder="Search..." value="@Model.searchstring">
-                                @*<input asp-for="searchstring" placeholder="Search..." value="@Model.searchstring">*@
-                                <button type="submit"><span class="icon_search"></span></button>
-                            </form>
-                        </div>
-                        <div class="shop__sidebar__accordion">
-                            <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
-                                    </div>
-                                    <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <div class="shop__sidebar__categories">
-                                                <ul class="nice-scroll">
-                                                    @*<li><a href="#">Men (20)</a></li>
-                                                    <li><a href="#">Women (20)</a></li>
-                                                    <li><a href="#">Bags (20)</a></li>
-                                                    <li><a href="#">Clothing (20)</a></li>
-                                                    <li><a href="#">Shoes (20)</a></li>
-                                                    <li><a href="#">Accessories (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>
-                                                    <li><a href="#">Kids (20)</a></li>*@
-                                                @foreach(var ct in Model.categoryResponse)
-                                                {
-                                                    <li>
-                                                        <a asp-page="/Shop" asp-route-category="@ct.CategoryId" class="page-link">@ct.CategoryName</a>
-                                                    </li>
-                                                }
-                                            </ul>
+                        <form method="get" asp-page="./Shop"  asp-route-SearchCategory="@Model.searchCategory" asp-route-SearchString="@Model.searchString">
+                            <div class="shop__sidebar__search d-flex">
+                                <input asp-for="searchString" placeholder="Search..." value="@Model.searchString" style="width:100%; margin-right:5px">
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="shop__sidebar__accordion">
+                                <div class="accordion" id="accordionExample">
+                                    <div class="card">
+                                        <div class="card-heading">
+                                            <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                        </div>
+                                        <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <div class="shop__sidebar__categories">
+                                                    <ul class="nice-scroll">
+                                                        <li>
+                                                            <a asp-route-SearchCategory="null" asp-route-SearchString="@Model.searchString">All</a>
+                                                        </li>
+                                                        @foreach(var ct in Model.categoryResponse)
+                                                        {
+                                                            <li>
+                                                                <a asp-route-SearchCategory="@ct.CategoryId" asp-route-SearchString="@Model.searchString">@ct.CategoryName</a>
+                                                            </li>
+                                                        }
+                                                </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-lg-9">
