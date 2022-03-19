@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="product__details__breadcrumb">
-                            <a <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
-                            <a <a class="nav-link" asp-area="" asp-page="/Shop">Shop</a>
+                            <a class="nav-link" asp-area="" asp-page="/Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-page="/Shop">Shop</a>
                             <span>Product Details</span>
                         </div>
                     </div>
@@ -66,9 +66,7 @@
                                 <span> - 5 Reviews</span>
                             </div>
                             <h3>$@Model.productDtoResponse.Price</h3>
-                            <p>Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
-                                cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
-                            with placket.</p>
+                            <p>@Model.productDtoResponse.ProductDescription</p>
                             @*<div class="product__details__option">
                                 <div class="product__details__option__size">
                                     <span>Size:</span>

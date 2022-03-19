@@ -10,7 +10,7 @@ namespace DataAccess.DTO.CategoryDto
     {
         public Guid CategoryId { get; set; }
         public string? CategoryName { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public Guid CreateBy { get; set; }
+        public string? CategoryDescription { get; set; }
+
     }
 }

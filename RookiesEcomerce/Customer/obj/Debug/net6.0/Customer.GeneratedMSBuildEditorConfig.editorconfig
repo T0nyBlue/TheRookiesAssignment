@@ -15,6 +15,22 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Customer
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Tony-Intern-Nashtech/TheRookiesProject/RookiesEcomerce/Customer/Pages/Authentication/login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cbG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Tony-Intern-Nashtech/TheRookiesProject/RookiesEcomerce/Customer/Pages/Authentication/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cTG9nb3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Tony-Intern-Nashtech/TheRookiesProject/RookiesEcomerce/Customer/Pages/Authentication/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQXV0aGVudGljYXRpb25cUmVnaXN0ZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Tony-Intern-Nashtech/TheRookiesProject/RookiesEcomerce/Customer/Pages/CheckOut.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ2hlY2tPdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Tony-Intern-Nashtech/TheRookiesProject/RookiesEcomerce/Customer/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

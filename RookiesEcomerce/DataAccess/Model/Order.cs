@@ -11,22 +11,49 @@ namespace DataAccess.Model
     {
         [Key]
         public Guid OrderId { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string FirstName { get; set; }
+
+        [Required]
+        [MaxLength(100)]
+        public string LastName { get; set; }
+
+        [Required]
+        [MaxLength(20)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public string Line1 { get; set; }
+        public string? Line2 { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public string Province { get; set; }
+
+        [Required]
+        [MaxLength(255)]
+        public string Country { get; set; }
+
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public Guid CreateBy { get; set; }
-        [Required(AllowEmptyStrings = false)]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
+
         public DateTime CreateDate { get; set; }
+
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public float Total { get; set; }
+
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string? Status { get; set; }
 
-        //Foreign Key
+        [Required]
         public Guid UserId { get; set; }
-        public User? User { get; set; }
+        
+        //Foreign Key
 
         public List<OrderDetail>? OrderDetails { get; set; }
     }

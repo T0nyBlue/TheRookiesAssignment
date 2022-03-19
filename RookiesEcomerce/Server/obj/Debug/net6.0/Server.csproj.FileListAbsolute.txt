@@ -75,3 +75,9 @@ C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.0\Server.pdb
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.0\Server.genruntimeconfig.cache
 C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.0\ref\Server.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.0\Server.RazorAssemblyInfo.cache
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\obj\Debug\net6.0\Server.RazorAssemblyInfo.cs
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\bin\Debug\net6.0\DataAccess.dll
+C:\Tony-Intern-Nashtech\TheRookiesProject\RookiesEcomerce\Server\bin\Debug\net6.0\DataAccess.pdb

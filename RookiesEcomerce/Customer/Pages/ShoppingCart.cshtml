@@ -14,8 +14,6 @@
                         <div class="breadcrumb__links">
                             <a>Home</a>
                             <a>Shop</a>
-                            @*<a class="nav-link" asp-area="" asp-page="/Index">Home</a>
-                            <a class="nav-link" asp-area="" asp-page="/Shop">Shop</a>*@
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -83,32 +81,26 @@
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="continue__btn update__btn">
-                                    @*<a href="#"><i class="fa fa-spinner"></i> Update cart</a>*@
-                                    <button type="submit" class="btn primary-btn cart-btn cart-btn-right">
-                                        <i class="fa-solid fa-eye-dropper"></i>
-                                        Upadate Cart
-                                    </button>
+                                    @if (Model.Cart != null)
+                                    {
+                                        <button type="submit" class="btn primary-btn cart-btn cart-btn-right">
+                                            <i class="fa-solid fa-eye-dropper"></i>
+                                            Update Cart
+                                        </button>
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4">
-                        @*<div class="cart__discount">
-                            <h6>Discount codes</h6>
-                            <form action="#">
-                                <input type="text" placeholder="Coupon code">
-                                <button type="submit">Apply</button>
-                            </form>
-                        </div>*@
                         <div class="cart__total">
                             <h6 class="font-weight-bold">Cart total</h6>
                             <ul>
-                                @*<li>Subtotal <span>$ 169.50</span></li>*@
                                 <li>Total <span>$@Model.Total</span></li>
                             </ul>
                             @if (Model.Cart != null)
                             {
-                                <a asp-page="/Checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
+                                <a asp-page="/CheckOut" class="primary-btn">PROCEED TO CHECKOUT</a>
                             }
                         </div>
                     </div>

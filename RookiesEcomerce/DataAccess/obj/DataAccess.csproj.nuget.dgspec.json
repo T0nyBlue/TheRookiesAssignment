@@ -42,7 +42,7 @@
           "dependencies": {
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
-              "version": "[11.0.0, )"
+              "version": "[8.1.1, )"
             },
             "IdentityServer4": {
               "target": "Package",

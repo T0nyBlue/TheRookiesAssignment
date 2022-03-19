@@ -54,6 +54,7 @@ namespace Customer.Pages
                 }
 
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
+                Total = (decimal)Cart.Sum(i => i.Product.Price * i.Quantity);
             }
             return Page();
         }

@@ -37,6 +37,5 @@ namespace DataAccess.Model
         //Foreign Key
         public List<ProductRating>? ProductRatings { get; set; }
         public List<UserAddress>? UserAddresses { get; set; }
-        public List<Order>? Orders { get; set; }
     }
 }

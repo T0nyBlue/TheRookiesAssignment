@@ -44,6 +44,7 @@
                         <form method="get" asp-page="./Shop"  asp-route-SearchCategory="@Model.searchCategory" asp-route-SearchString="@Model.searchString">
                             <div class="shop__sidebar__search d-flex">
                                 <input asp-for="searchString" placeholder="Search..." value="@Model.searchString" style="width:100%; margin-right:5px">
+                                <input hidden asp-for="searchCategory" placeholder="Search..." value="@Model.searchCategory" style="width:100%; margin-right:5px">
                                 <button class="btn btn-primary" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
                             <div class="shop__sidebar__accordion">

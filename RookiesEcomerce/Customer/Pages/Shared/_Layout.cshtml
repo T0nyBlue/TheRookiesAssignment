@@ -77,8 +77,17 @@
                     <div class="header__nav__option">
                         @*<a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
                         <a href="#"><img src="img/icon/heart.png" alt=""></a>*@
-                        <a class="nav-link" asp-area="" asp-page="/ShoppingCart"><img src="img/icon/cart.png" alt=""></a>
-                        <div class="price">$0.00</div>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a class="nav-link" asp-area="" asp-page="/ShoppingCart"><img src="img/icon/cart.png" alt=""></a>
+                            <a asp-page="/Index" asp-route-id="@User.Claims.FirstOrDefault(c => c.Type == "sub").Value">Hello @User.Claims.FirstOrDefault(claim => claim.Type == "name").Value </a>
+                            <a asp-page="/Authentication/Logout"><i class="fa fa-user"></i> Logout</a>
+                        }
+                        else
+                        {
+                            <a asp-page="/Authentication/Login"><i class="fa fa-user"></i> Login</a>
+                            <a asp-page="/Authentication/Register"><i class="fa fa-user"></i> Register</a>
+                        }
                     </div>
                 </div>
             </div>

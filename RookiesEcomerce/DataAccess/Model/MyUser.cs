@@ -21,7 +21,7 @@ namespace DataAccess.Model
         [Required]
         [MaxLength(255)]
         public string Line1 { get; set; }
-        public string Line2 { get; set; }
+        public string? Line2 { get; set; }
 
         [Required]
         [MaxLength(255)]

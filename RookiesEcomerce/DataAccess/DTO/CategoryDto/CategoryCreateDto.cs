@@ -11,7 +11,8 @@ namespace DataAccess.DTO.CategoryDto
     {
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string? CategoryName { get; set; }
-        public Guid CreateBy { get; set; }
+        public string CategoryName { get; set; }
+        public string? CategoryDescription { get; set; }
+
     }
 }

@@ -13,6 +13,8 @@ namespace DataAccess.DTO.CategoryDto
         public Guid CategoryId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string? CategoryName { get; set; }
+        public string CategoryName { get; set; }
+        public string? CategoryDescription { get; set; }
+
     }
 }

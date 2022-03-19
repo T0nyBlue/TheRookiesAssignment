@@ -12,7 +12,8 @@ namespace DataAccess.DTO.ProductDto
     public class ProductReadDto
     {
         public Guid ProductId { get; set; }
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
+        public string? ProductDescription { get; set; }
         public float Price { get; set; }
         public int ProductQuantity { get; set; }
         public Guid CreateBy { get; set; }

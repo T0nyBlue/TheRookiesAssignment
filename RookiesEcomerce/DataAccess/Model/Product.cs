@@ -14,7 +14,10 @@ namespace DataAccess.Model
         public Guid ProductId { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public string? ProductName { get; set; }
+        public string ProductName { get; set; }
+        [Required(AllowEmptyStrings = false)]
+        [DisplayFormat(ConvertEmptyStringToNull = false)]
+        public string? ProductDescription { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public float Price { get; set; }
@@ -23,11 +26,9 @@ namespace DataAccess.Model
         public int ProductQuantity { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public Guid CreateBy { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public Guid LastModifyBy { get; set; }
         public DateTime LastModifyDate { get; set; } = DateTime.Now;
         public float TotalRating { get; set; } = 0;
 

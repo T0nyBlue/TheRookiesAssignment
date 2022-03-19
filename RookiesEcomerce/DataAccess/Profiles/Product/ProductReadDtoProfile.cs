@@ -14,5 +14,5 @@ namespace DataAccess.Profiles.Product
         {
             CreateMap<DataAccess.Model.Product, ProductReadDto>();
         }
-}
+    }
 }

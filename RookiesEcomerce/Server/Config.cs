@@ -1,61 +1,87 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityServer4;
+using IdentityServer4.Models;
 
 namespace Server
 {
-	public class Config
-	{
+    public class Config
+    {
         public static IEnumerable<IdentityResource> IdentityResources =>
-            new[]
-            {
-                new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
-                new IdentityResource
-                {
-                    Name = "role",
-                    UserClaims = new List<string> { "role" }
-                }
-            };
+        new List<IdentityResource>
+        {
+            new IdentityResources.OpenId(),
+            new IdentityResources.Profile(),
+             new IdentityResource("roles", new[] { "role" }) //Add this line
+        };
 
         public static IEnumerable<ApiScope> ApiScopes =>
-            new[] { new ApiScope("CoffeeAPI.read"), new ApiScope("CoffeeAPI.write"), };
-        public static IEnumerable<ApiResource> ApiResources =>
-            new[]
-            {
-                new ApiResource("CoffeeAPI")
-                {
-                    Scopes = new List<string> { "CoffeeAPI.read", "CoffeeAPI.write" },
-                    ApiSecrets = new List<Secret> { new Secret("ScopeSecret".Sha256()) },
-                    UserClaims = new List<string> { "role" }
-                }
+            new[] {
+                new ApiScope("api1", "https://localhost:5003")
             };
 
+
         public static IEnumerable<Client> Clients =>
-            new[]
+        new List<Client>
+        {
+            // machine to machine client (from quickstart 1)
+            new Client
             {
-                // m2m client credentials flow client
-                new Client
-                {
-                    ClientId = "m2m.client",
-                    ClientName = "Client Credentials Client",
-                    AllowedGrantTypes = GrantTypes.ClientCredentials,
-                    ClientSecrets = { new Secret("ClientSecret1".Sha256()) },
-                    AllowedScopes = { "CoffeeAPI.read", "CoffeeAPI.write" }
-                },
-                // interactive client using code flow + pkce
-                new Client
-                {
-                    ClientId = "interactive",
-                    ClientSecrets = { new Secret("ClientSecret1".Sha256()) },
+                ClientId = "connect",
+                ClientSecrets = { new Secret("connect".Sha256()) },
+
+                AllowedGrantTypes = GrantTypes.ClientCredentials ,
+                // scopes that client has access to
+                AllowedScopes = { "api1" }
+            },
+            // interactive ASP.NET Core MVC client
+            new Client
+            {
+                 ClientName = "Customer",
+                   ClientId = "customer",
+                    ClientSecrets = { new Secret("customer".Sha256()) },
+
                     AllowedGrantTypes = GrantTypes.Code,
-                    RedirectUris = { "https://localhost:5444/signin-oidc" },
-                    FrontChannelLogoutUri = "https://localhost:5444/signout-oidc",
-                    PostLogoutRedirectUris = { "https://localhost:5444/signout-callback-oidc" },
+
+                    // where to redirect to after login
+                    RedirectUris = { "https://localhost:5002/signin-oidc" },
+
+                    // where to redirect to after logout
+                    PostLogoutRedirectUris = { "https://localhost:5002/signout-callback-oidc" },
+
+                    // Enable refresh token
                     AllowOfflineAccess = true,
-                    AllowedScopes = { "openid", "profile", "CoffeeAPI.read" },
-                    RequirePkce = true,
-                    RequireConsent = true,
-                    AllowPlainTextPkce = false
-                },
-            };
-    }
+
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles"
+                    }
+            },
+            new Client
+            {
+                ClientName ="Admin",
+                ClientId = "admin",
+                ClientSecrets = {new Secret("admin".Sha256()) },
+                AllowedGrantTypes = GrantTypes.Implicit ,
+                RedirectUris = new List<string>()
+                    {
+                        "https://localhost:3000/callback",
+                        "https://localhost:5003/callback"
+                    },
+                 PostLogoutRedirectUris = new List<string>()
+                    {
+                        "https://localhost:3000/",
+                        "https://localhost:5003/"
+                    },
+
+                  AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "roles"
+                    },
+                  AllowAccessTokensViaBrowser = true
+            }
+        };
+    };
 }

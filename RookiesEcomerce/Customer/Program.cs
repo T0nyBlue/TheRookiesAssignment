@@ -1,5 +1,8 @@
 using DataAccess.Data;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
+using Server;
+using System.IdentityModel.Tokens.Jwt;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,38 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSession();
+
+JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
+
+builder.Services.AddIdentityLayer(builder.Configuration);
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+    .AddCookie("Cookies", options =>
+    {
+        options.AccessDeniedPath = "/Errors/Error403";
+    })
+    .AddOpenIdConnect("oidc", options =>
+    {
+        options.Authority = "https://localhost:5443";
+
+        options.ClientId = "customer";
+        options.ClientSecret = "customer";
+        options.ResponseType = "code";
+        options.UsePkce = true;
+
+        options.Scope.Add("profile");
+        options.Scope.Add("offline_access");
+
+        options.Scope.Add("roles");
+        options.ClaimActions.MapJsonKey("role", "role", "role");
+        options.TokenValidationParameters.RoleClaimType = "role";
+        options.GetClaimsFromUserInfoEndpoint = true;
+        options.SaveTokens = true;
+    })
+    ;
 
 var app = builder.Build();
 
@@ -32,6 +67,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
