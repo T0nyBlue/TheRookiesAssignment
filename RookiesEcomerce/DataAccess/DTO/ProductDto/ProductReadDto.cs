@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO.ProductImgDto;
+﻿using DataAccess.DTO.CategoryDto;
+using DataAccess.DTO.ProductImgDto;
 using DataAccess.Model;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace DataAccess.DTO.ProductDto
         public int ProductQuantity { get; set; }
         public Guid CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
-        public Guid LastModifyBy { get; set; }
         public DateTime LastModifyDate { get; set; }
         public float TotalRating { get; set; } = 0;
 
         //Foreign Key
         public Guid CategoryId { get; set; }
+        public CategoryReadDto? Category { get; set; }
         public List<ProductImgReadDto>? ProductImgReadDto { get; set; }
         //public List<ProductRating>? ProductRatings { get; set; }
     }

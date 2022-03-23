@@ -63,7 +63,8 @@ namespace Customer.Pages
                 Line1 = CurrentUser.Line1,
                 Line2 = CurrentUser.Line2,
                 PhoneNumber = CurrentUser.PhoneNumber,
-                Province = CurrentUser.Province
+                Province = CurrentUser.Province,
+                Total = Cart.Sum(p => p.Quantity * p.Product.Price)
             };
             if (Cart == null)
                 return RedirectToPage("/Home/Index");
@@ -85,46 +86,14 @@ namespace Customer.Pages
                     CreateOrder.Status = "Success";
                     CreateOrder.UserId = userId;
 
-                    //OrderDto order = await _orderService.CreateOrder(CreateOrder);
-                    //List<CreateOrderItemDto> createOrderItemDtos = new List<CreateOrderItemDto>();
-                    //List<CreateProductRatingDto> createProductRatingDtos = new List<CreateProductRatingDto>();
-                    //foreach (var item in Cart)
-                    //{
-                    //    createOrderItemDtos.Add(new CreateOrderItemDto
-                    //    {
-                    //        OrderId = order.Id,
-                    //        Price = item.Product.Price,
-                    //        Quantity = item.Quantity,
-                    //        ProductId = item.Product.Id,
-                    //        CreatedBy = userId,
-                    //        UpdatedBy = userId
-                    //    });
+                    var order = _mapper.Map<Order>(CreateOrder);
 
-                    //    // init temporary
-                    //    createProductRatingDtos.Add(new CreateProductRatingDto
-                    //    {
-                    //        ProductId = item.Product.Id,
-                    //        OrderItemId = order.Id,
-                    //        IsRated = false,
-                    //        Comment = "",
-                    //        Rating = 5,
-                    //        CreatedBy = userId,
-                    //        UpdatedBy = userId
-                    //    });
-                    //}
-
-                    //List<OrderItemDto> orderItemDtos = await _orderItemService.AddRangeOrderItemsAsync(createOrderItemDtos);
-
-                    //for (int i = 0; i < orderItemDtos.Count; i++)
-                    //{
-                    //    createProductRatingDtos[i].OrderItemId = orderItemDtos[i].Id;
-                    //}
-
-                    //await _productRatingService.AddRangeProductRatingAsync(createProductRatingDtos);
-                    //TempData["AlertMessage"] = "Order Product Successfully!";
-                    //SessionHelper.Remove(HttpContext.Session, "cart");
-                    //Cart = null;
+                    _db.Orders.Add(order);
+                    _db.SaveChanges();
                 }
+                TempData["AlertMessage"] = "Order Product Successfully!";
+                SessionHelper.Remove(HttpContext.Session, "cart");
+                return RedirectToPage("/Shop");
             }
 
             return Page();

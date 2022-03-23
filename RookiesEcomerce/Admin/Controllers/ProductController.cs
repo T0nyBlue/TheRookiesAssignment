@@ -38,6 +38,7 @@ namespace Admin.Controllers
             var productResponse = await _db.Products
                 .Skip((page - 1) * (int)pageResults)
                 .Take((int)pageResults)
+                .Include(p => p.Category)
                 .ToListAsync();
 
             var productDtoResponse = _mapper.Map<List<ProductReadDto>>(productResponse);
@@ -123,6 +124,7 @@ namespace Admin.Controllers
                     .Where(x => x.ProductName.Contains(keyword))
                     .Skip((page - 1) * (int)pageResults)
                     .Take((int)pageResults)
+                    .Include(p => p.Category)
                     .ToListAsync();
 
                 if (productResponse == null)
@@ -198,6 +200,22 @@ namespace Admin.Controllers
             await _db.SaveChangesAsync();
 
             return Ok(product);
+        }
+
+        //Delete
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteProduct(Guid id)
+        {
+            var product = await _db.Products.FirstOrDefaultAsync(x => x.ProductId == id);
+            if (product == null)
+            {
+                return NotFound("No product founded!");
+            }
+
+            _db.Products.Remove(product);
+            await _db.SaveChangesAsync();
+
+            return Ok("Category Deleted");
         }
     }
 }

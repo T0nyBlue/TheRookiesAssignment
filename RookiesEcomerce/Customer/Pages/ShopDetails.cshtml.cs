@@ -76,7 +76,7 @@ namespace Customer.Pages
                     }
                 }
                 SessionHelper.SetObjectAsJson(HttpContext.Session, "cart", Cart);
-                TempData["AlertMessage"] = "Product addded to cart";
+           
                 return RedirectToPage("/ShopDetails", new { id = productAddToCart.ProductId });
             }
             return NotFound();

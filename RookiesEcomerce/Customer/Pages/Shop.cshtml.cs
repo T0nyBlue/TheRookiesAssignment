@@ -30,7 +30,7 @@ namespace Customer.Pages
 
         public List<Product> productResponse { get; set; }
 
-        public const int pageResults = 1;
+        public const int pageResults = 3;
 
         [BindProperty(SupportsGet = true, Name = "p")]
         public int page { get; set; } = 1;

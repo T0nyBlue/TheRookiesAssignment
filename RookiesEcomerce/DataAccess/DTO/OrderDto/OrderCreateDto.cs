@@ -46,8 +46,6 @@ namespace DataAccess.DTO.OrderDto
         [DisplayFormat(ConvertEmptyStringToNull = false)]
         public float Total { get; set; }
 
-        [Required(AllowEmptyStrings = false)]
-        [DisplayFormat(ConvertEmptyStringToNull = false)]
         public string? Status { get; set; }
 
         [Required]
