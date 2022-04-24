@@ -2,6 +2,7 @@ using AutoMapper;
 using Customer.Helpers;
 using DataAccess.Data;
 using DataAccess.DTO.AddToCartDto;
+using DataAccess.DTO.OrderDetailDto;
 using DataAccess.DTO.OrderDto;
 using DataAccess.Model;
 using Microsoft.AspNetCore.Authorization;
@@ -44,6 +45,8 @@ namespace Customer.Pages
         [BindProperty]
         public OrderCreateDto CreateOrder { get; set; }
 
+        public OrderDetailCreateDto CreateOderDetail { get; set; }
+
         public decimal TotalMoney { get; set; }
         public UserManager<MyUser> UserManager { get; }
 
@@ -81,6 +84,7 @@ namespace Customer.Pages
 
                 if (Cart != null)
                 {
+                    CreateOderDetail = new OrderDetailCreateDto();
                     Guid userId = Guid.Parse(User.Claims.FirstOrDefault(u => u.Type == "sub").Value);
                     CreateOrder.Total = Cart.Sum(p => p.Quantity * p.Product.Price);
                     CreateOrder.Status = "Success";
@@ -88,9 +92,27 @@ namespace Customer.Pages
 
                     var order = _mapper.Map<Order>(CreateOrder);
 
-                    _db.Orders.Add(order);
+
+                    var newOrder = _db.Orders.Add(order);
+                    _db.SaveChanges();
+
+                    List<OrderDetailCreateDto> newOrders = new List<OrderDetailCreateDto>();
+
+                    foreach (var item in Cart)
+                    {
+                        CreateOderDetail.OrderId = newOrder.Entity.OrderId;
+                        CreateOderDetail.ProductId = item.Product.ProductId;
+                        CreateOderDetail.Quantity = item.Quantity;
+                        CreateOderDetail.UnitPrice = item.Product.Price;
+                        CreateOderDetail.TotalPrice = item.Quantity * item.Product.Price;
+
+                        newOrders.Add(CreateOderDetail);
+                    }
+
+                    _db.OrderDetails.AddRange(_mapper.Map<List<OrderDetail>>(newOrders));
                     _db.SaveChanges();
                 }
+
                 TempData["AlertMessage"] = "Order Product Successfully!";
                 SessionHelper.Remove(HttpContext.Session, "cart");
                 return RedirectToPage("/Shop");

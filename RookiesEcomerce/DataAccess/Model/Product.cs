@@ -26,10 +26,10 @@ namespace DataAccess.Model
         public int ProductQuantity { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public DateTime CreateDate { get; set; } = DateTime.Now;
+        public DateTime CreateDate { get; set; }
         [Required(AllowEmptyStrings = false)]
         [DisplayFormat(ConvertEmptyStringToNull = false)]
-        public DateTime LastModifyDate { get; set; } = DateTime.Now;
+        public DateTime LastModifyDate { get; set; }
         public float TotalRating { get; set; } = 0;
 
         //Foreign Key

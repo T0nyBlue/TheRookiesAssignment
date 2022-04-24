@@ -4,6 +4,7 @@ using DataAccess.DTO.ProductDto;
 using DataAccess.DTO.ProductImgDto;
 using DataAccess.Model;
 using EnsureThat;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using System.Linq;
 
 namespace Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -25,7 +27,7 @@ namespace Admin.Controllers
 
         //Get all products
         [HttpGet]
-        public async Task<ActionResult<List<ProductReadDto>>> GetProducts(int page)
+        public async Task<IActionResult> GetProducts(int page)
         {
             if (_db.Products == null)
             {
@@ -43,10 +45,10 @@ namespace Admin.Controllers
 
             var productDtoResponse = _mapper.Map<List<ProductReadDto>>(productResponse);
 
-            foreach (var product in productDtoResponse)
-            {
-                product.ProductImgReadDto = _mapper.Map<List<ProductImgReadDto>>(_db.ProductImgs.Where(x => x.ProductId == product.ProductId));
-            }
+            //foreach (var product in productDtoResponse)
+            //{
+            //    product.ProductImgReadDto = _mapper.Map<List<ProductImgReadDto>>(_db.ProductImgs.Where(x => x.ProductId == product.ProductId));
+            //}
 
             var response = new ProductResponseDto
             {
@@ -184,17 +186,65 @@ namespace Admin.Controllers
 
         //Create product
         [HttpPost]
-        public async Task<ActionResult<List<ProductCreateDto>>> CreateProduct(ProductCreateDto postProductDto)
+        public async Task<IActionResult> CreateProduct(ProductCreateDto postProductDto)
         {
-            Ensure.Any.IsNotNull(postProductDto, nameof(postProductDto));
+            //Ensure.Any.IsNotNull(postProductDto, nameof(postProductDto));
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var product = _mapper.Map<Product>(postProductDto);
             _db.Products.Add(product);
 
-            foreach (var img in postProductDto.ProductImgCreateDto)
+            if(postProductDto.ProductImgCreateDto != null)
             {
-                var productImg = _mapper.Map<ProductImg>(img);
-                productImg.ProductId = product.ProductId;
-                _db.ProductImgs.Add(productImg);
+                foreach (var img in postProductDto.ProductImgCreateDto)
+                {
+                    var productImg = _mapper.Map<ProductImg>(img);
+                    productImg.ProductId = product.ProductId;
+                    _db.ProductImgs.Add(productImg);
+                }
+            }    
+
+            await _db.SaveChangesAsync();
+
+            return Ok(product);
+        }
+
+        //Update product
+        [HttpPut("{id}")]
+        public async Task<ActionResult<List<ProductCreateDto>>> UpdateProduct(Guid id, [FromBody]ProductUpdateDto postProductDto)
+        {
+            //Ensure.Any.IsNotNull(postProductDto, nameof(postProductDto));
+            //var product = _mapper.Map<Product>(postProductDto);
+            //_db.Products.Update(product);
+
+            //var prId = Guid.Parse(postProductDto.ProductId);
+
+            var product = _db.Products.Find(id);
+
+            if (product == null)
+                return BadRequest("No Product Not Founded!"); 
+
+            product.ProductName = postProductDto.ProductName;
+            product.ProductDescription = postProductDto?.ProductDescription;
+            product.LastModifyDate = DateTime.Now;
+            product.Price = postProductDto.Price;
+
+            _db.Products.Update(product);
+            await _db.SaveChangesAsync();
+
+            if (postProductDto.ProductImgCreateDto.Count != 0)
+            {
+                foreach (var img in postProductDto.ProductImgCreateDto)
+                {
+                    //var productImg = _mapper.Map<ProductImg>(img);
+                    //productImg.ProductId = product.ProductId;
+                    var productImg = _db.ProductImgs.FirstOrDefault(x => x.ProductId == id);
+                    productImg.ProductImgLink = img.ProductImgLink;
+                    _db.ProductImgs.Update(productImg);
+                }
             }
 
             await _db.SaveChangesAsync();

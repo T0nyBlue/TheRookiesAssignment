@@ -4,6 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Server;
 using Server.Data;
 
+var AllOrigins = "AllowAllOrigins";
+
 var seed = args.Contains("/seed");
 if (seed)
 {
@@ -41,10 +43,22 @@ builder.Services.AddIdentityServer()
     })
     .AddDeveloperSigningCredential();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: AllOrigins,
+                      builder =>
+                      {
+                          builder.AllowAnyOrigin()
+                          .AllowAnyHeader()
+                          .AllowAnyMethod();
+                      });
+});
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 app.UseStaticFiles();
+app.UseCors(AllOrigins);
 app.UseRouting();
 app.UseIdentityServer();
 app.UseAuthorization();
